@@ -11,11 +11,11 @@ all: debug
 
 # Release Build
 release:
-	scons target="release" bin/godot
+	scons target="release" godot
 
 # Profile Build
 profile:
-	scons target="profile" bin/godot
+	scons target="profile" godot
 
 # Debug Build
 debug:
@@ -24,7 +24,7 @@ debug:
 	# g0: no debug info
 	# g1: minimal info
 	# g3: maximal info
-	scons target="debug" CCFLAGS="-g" bin/godot
+	/usr/local/Cellar/scons/2.3.2_1/bin/scons target="debug" CCFLAGS="-g" platform=osx bits=64
 
 clean:
-	scons -c bin/godot
+	scons -c godot

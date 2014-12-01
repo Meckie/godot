@@ -41,6 +41,7 @@ class Sprite : public Node2D {
 
 	bool centered;
 	Point2 offset;
+    Size2 scale_to_size;
 
 	bool hflip;
 	bool vflip;
@@ -75,6 +76,9 @@ public:
 
 	void set_offset(const Point2& p_offset);
 	Point2 get_offset() const;
+
+    void set_scale_to_size(const Point2& size);
+    Size2 get_scale_to_size();
 
 	void set_flip_h(bool p_flip);
 	bool is_flipped_h() const;

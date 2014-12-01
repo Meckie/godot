@@ -139,7 +139,23 @@ void Sprite::set_offset(const Point2& p_offset) {
 }
 Point2 Sprite::get_offset() const {
 
-	return offset;
+    return offset;
+}
+
+void Sprite::set_scale_to_size(const Point2 &size)
+{
+    scale_to_size.x = size.x/texture->get_width();
+    scale_to_size.y = size.y/texture->get_height();
+    set_scale(scale_to_size);
+    update();
+}
+
+Size2 Sprite::get_scale_to_size()
+{
+    scale_to_size.x = get_scale().x * texture->get_width();
+    scale_to_size.y = get_scale().y * texture->get_height();
+
+    return scale_to_size;
 }
 
 void Sprite::set_flip_h(bool p_flip) {
@@ -283,6 +299,9 @@ void Sprite::_bind_methods() {
 	ObjectTypeDB::bind_method(_MD("set_offset","offset"),&Sprite::set_offset);
 	ObjectTypeDB::bind_method(_MD("get_offset"),&Sprite::get_offset);
 
+    ObjectTypeDB::bind_method(_MD("set_scale_to_size","scale_to_size"),&Sprite::set_scale_to_size);
+    ObjectTypeDB::bind_method(_MD("get_scale_to_size"),&Sprite::get_scale_to_size);
+
 	ObjectTypeDB::bind_method(_MD("set_flip_h","flip_h"),&Sprite::set_flip_h);
 	ObjectTypeDB::bind_method(_MD("is_flipped_h"),&Sprite::is_flipped_h);
 
@@ -310,6 +329,7 @@ void Sprite::_bind_methods() {
 	ADD_PROPERTY( PropertyInfo( Variant::OBJECT, "texture", PROPERTY_HINT_RESOURCE_TYPE,"Texture"), _SCS("set_texture"),_SCS("get_texture"));
 	ADD_PROPERTY( PropertyInfo( Variant::BOOL, "centered"), _SCS("set_centered"),_SCS("is_centered"));
 	ADD_PROPERTY( PropertyInfo( Variant::VECTOR2, "offset"), _SCS("set_offset"),_SCS("get_offset"));
+    ADD_PROPERTY( PropertyInfo( Variant::VECTOR2, "scale_to_size"), _SCS("set_scale_to_size"),_SCS("get_scale_to_size"));
 	ADD_PROPERTY( PropertyInfo( Variant::BOOL, "flip_h"), _SCS("set_flip_h"),_SCS("is_flipped_h"));
 	ADD_PROPERTY( PropertyInfo( Variant::BOOL, "flip_v"), _SCS("set_flip_v"),_SCS("is_flipped_v"));
 	ADD_PROPERTY( PropertyInfo( Variant::INT, "vframes"), _SCS("set_vframes"),_SCS("get_vframes"));
